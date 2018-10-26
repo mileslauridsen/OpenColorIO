@@ -188,7 +188,7 @@ OCIO_NAMESPACE_ENTER
         {
             return simple_lut[clamp(index, 0.0f, maxIndex)];
         }
-        
+        #ifdef USE_SSE
         void Lut1D_Nearest(float* rgbaBuffer, long numPixels, const Lut1D & lut)
         {
             float maxIndex[3];
@@ -218,7 +218,7 @@ OCIO_NAMESPACE_ENTER
                 rgbaBuffer += 4;
             }
         }
-#ifdef USE_SSE
+#else
         void Lut1D_Nearest_SSE(float* rgbaBuffer, long numPixels, const Lut1D & lut)
         {
             // orig: 546 ms
